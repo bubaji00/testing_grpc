@@ -1,0 +1,22 @@
+syntax = "proto3";
+package chat;
+
+message Message {
+  string body = 1;
+}
+message NumberRequest {
+  int32 number = 1;
+}
+
+message CalculationResponse {
+  int64 result = 1;
+}
+service ChatService {
+  rpc SayHello(Message) returns (Message) {}
+  rpc BroadcastMessage(Message) returns (Message) {}
+  rpc CalculateFactorial (NumberRequest) returns (CalculationResponse);
+}
+
+option go_package = "./chat";
+
+// protoc --go_out=plugins=grpc:chat chat.proto
